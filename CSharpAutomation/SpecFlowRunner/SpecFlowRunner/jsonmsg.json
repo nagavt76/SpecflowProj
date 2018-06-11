@@ -1,0 +1,7 @@
+{
+    "customerId": 11,
+    "type": "credit",
+    "description": "credited",
+    "amount": 200,
+    "transDate": "2018-04-03T18:30:00.000+0000"
+}

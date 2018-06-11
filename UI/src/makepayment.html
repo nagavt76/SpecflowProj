@@ -1,0 +1,126 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/datetime-picker/date-picker.html">
+<link rel="import" href="../bower_components/datetime-picker/datetime-picker.html">
+<link rel="import" href="../bower_components/datetime-input/datetime-input.html">
+
+
+<dom-module id="make-payment">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      .centerdiv{
+        margin: 0 auto;
+        width: 50%;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        border-radius: 5px;
+        padding: 16px;
+        height: auto;
+      }
+    </style>
+
+<iron-ajax
+url="http://httpbin.org/post"
+id="submitPayment"
+method="post"
+params = {{submitData}}
+handle-as="json"
+on-response="handleResponse"
+debounce-duration="300"></iron-ajax>
+
+<div class="card">
+    <div class="centerdiv">
+        <form name="form" id="paymentForm">
+            <paper-listbox>
+              <paper-item class="paper-item"><span>Customer ID</span><paper-input id="custid" type="text" auto-validate allowed-pattern="[0-9]" label="Enter your customer id" ></paper-input></paper-item>
+              <paper-item class="paper-item"><span>Amount</span><paper-input id="amount" type="text" auto-validate allowed-pattern="[0-9]" label="Enter Amount in Australian dollar"></paper-input></paper-item>
+              <paper-item class="paper-item"><span>Payment Type</span>
+                <paper-dropdown-menu label="Select Payment Type" class="select pass">
+                    <paper-listbox slot="dropdown-content" on-iron-select="symbolSelected">
+                      <paper-item  class="paper-item" name="symbol">DEBIT</paper-item></br>
+                       <paper-item class="paper-item" name="symbol">CREDIT</paper-item></br>
+                    </paper-listbox>
+                  </paper-dropdown-menu>
+              </paper-item>
+              <paper-item class="paper-item"><span>Select Date</span><datetime-picker id="dateval" date="{{date}}" datetime="{{datetime}}" step="5"></datetime-picker></paper-item>
+              <paper-item class="paper-item"><span>Description</span><paper-input id="amount" type="text" label="Enter Payment Description"></paper-input></paper-item>
+            </paper-listbox>
+            <paper-button raised on-click="submitdata" id="submitbtn" class="fancy">SUBMIT</paper-button>
+            </form>
+    </div>
+  </br>
+</br>
+</div>
+</div>
+
+  </template>
+
+  <script>
+    class MakePayment extends Polymer.Element {
+      static get is() { return 'make-payment'; }
+      static get properties(){
+        return{
+          paytype:{
+            type:String
+          },
+          dateval:{
+            type:String
+          },
+          amount:{
+            type:Number
+          },
+          custid:{
+            type:Number
+          },
+          paydesc:{
+            type:String
+          },
+          submitData:{
+            type:Object,
+            value:{}
+          }
+        }
+      }
+      submitdata(){
+        var ajaxRequest= this.$.submitPayment;
+        this.$.submitPayment.generateRequest();
+      }
+
+      symbolSelected (e) {
+       this.symbol = e.target.selectedItem.innerText;
+      }
+
+      handleResponse(event, request) {
+        var response = request.response;
+         window.history.pushState({}, null, 'showtransaction');
+         window.location.href="showtransaction";
+      }
+    }
+
+    window.customElements.define(MakePayment.is, MakePayment);
+  </script>
+</dom-module>

@@ -1,0 +1,7 @@
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\bin\Debug\ArrayList.exe.config
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\bin\Debug\ArrayList.exe
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\bin\Debug\ArrayList.pdb
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\obj\Debug\ArrayList.csprojResolveAssemblyReference.cache
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\obj\Debug\ArrayList.csproj.CoreCompileInputs.cache
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\obj\Debug\ArrayList.exe
+D:\Data\GitRepo\Squad2B\CSharpAutomation\SpecFlowRunner\ArrayList\obj\Debug\ArrayList.pdb
